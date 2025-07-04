@@ -20,7 +20,7 @@
         }
 
         .container {
-            max-width: 1000px; /* Increased from 960px */
+            max-width: 1000px;
             margin: 0 auto;
             text-align: center;
         }
@@ -29,7 +29,6 @@
             margin-bottom: 60px;
         }
 
-        /* Styling for the new title image */
         .header img {
             max-width: 650px;
             width: 100%;
@@ -51,7 +50,7 @@
         }
 
         .screenshot {
-            max-width: 1000px; /* Increased from 900px */
+            max-width: 1000px;
             margin: 0 auto;
         }
 
@@ -61,14 +60,13 @@
             display: block;
         }
 
-        /* Responsive adjustments for mobile */
         @media (max-width: 768px) {
             body {
                 padding: 40px 15px;
             }
 
             .header img {
-                max-width: 90%; /* Adjust for smaller screens */
+                max-width: 90%;
             }
 
             .section-text {
@@ -80,16 +78,9 @@
 <body>
     <div class="container">
         <div class="header">
-            <picture>
-                <!-- CDN WebP -->
-                <source srcset="https://cd.jsdelivr.net/gh/tabakerkaaaa/ai-voice-generator-welcome/welcome-title.webp" type="image/webp">
-                <!-- CDN PNG -->
-                <source srcset="https://cdn.jsdelivr.net/gh/tabakerkaaaa/ai-voice-generator-welcome/welcome-title.png" type="image/png">
-                <!-- Local WebP -->
-                <source srcset="welcome-title.webp" type="image/webp">
-                <!-- Local PNG (fallback img tag) -->
-                <img src="welcome-title.png" alt="Browser puzzle piece and pin icons" width="4453" height="992">
-            </picture>    
+            <img src="https://cdn.jsdelivr.net/gh/tabakerkaaaa/ai-voice-generator-welcome/welcome-title.webp"
+                 data-fallback="welcome-title.png"
+                 alt="Thanks for choosing AI Voice Generator" width="4453" height="992">
         </div>
 
         <div class="section">
@@ -97,16 +88,9 @@
                 Click the puzzle piece (1) in the top right of your browser. Then, click the little pin (2) next to the extension:
             </p>
             <div class="screenshot">
-                <picture>
-                    <!-- CDN WebP -->
-                    <source srcset="https://cdn.jsdelivr.net/gh/tabakerkaaaa/ai-voice-generator-welcome/welcome-1.webp" type="image/webp">
-                    <!-- CDN PNG -->
-                    <source srcset="https://cdn.jsdelivr.net/gh/tabakerkaaaa/ai-voice-generator-welcome/welcome-1.png" type="image/png">
-                    <!-- Local WebP -->
-                    <source srcset="welcome-1.webp" type="image/webp">
-                    <!-- Local PNG (fallback img tag) -->
-                    <img src="welcome-1.png" alt="Browser puzzle piece and pin icons" width="3024" height="1476">
-                </picture>
+                <img src="https://cdn.jsdelivr.net/gh/tabakerkaaaa/ai-voice-generator-welcome/welcome-1.webp"
+                     data-fallback="welcome-1.png"
+                     alt="Browser puzzle piece and pin icons" width="3024" height="1476">
             </div>
         </div>
 
@@ -115,16 +99,9 @@
                 Open the extension (3) on any page to start using AI&nbsp;Voice&nbsp;Generator:
             </p>
             <div class="screenshot">
-                <picture>
-                    <!-- CDN WebP -->
-                    <source srcset="https://cdn.jsdelivr.net/gh/tabakerkaaaa/ai-voice-generator-welcome/welcome-2.webp" type="image/webp">
-                    <!-- CDN PNG -->
-                    <source srcset="https://cdn.jsdelivr.net/gh/tabakerkaaaa/ai-voice-generator-welcome/welcome-2.png" type="image/png">
-                    <!-- Local WebP -->
-                    <source srcset="welcome-2.webp" type="image/webp">
-                    <!-- Local PNG (fallback img tag) -->
-                    <img src="welcome-2.png" alt="Browser puzzle piece and pin icons" width="3024" height="1476" loading="lazy">
-                </picture>
+                <img src="https://cdn.jsdelivr.net/gh/tabakerkaaaa/ai-voice-generator-welcome/welcome-2.webp"
+                     data-fallback="welcome-2.png"
+                     alt="Extension icon in toolbar" width="3024" height="1476" loading="lazy">
             </div>
         </div>
 
@@ -133,18 +110,26 @@
                 Bonus Tip: Right-click selected text (1), then choose 'Generate&nbsp;AI&nbsp;voice' (2) to open the extension with your text already pasted in:
             </p>
             <div class="screenshot">
-                <picture>
-                    <!-- CDN WebP -->
-                    <source srcset="https://cdn.jsdelivr.net/gh/tabakerkaaaa/ai-voice-generator-welcome/welcome-bonus.webp" type="image/webp">
-                    <!-- CDN PNG -->
-                    <source srcset="https://cdn.jsdelivr.net/gh/tabakerkaaaa/ai-voice-generator-welcome/welcome-bonus.png" type="image/png">
-                    <!-- Local WebP -->
-                    <source srcset="welcome-bonus.webp" type="image/webp">
-                    <!-- Local PNG (fallback img tag) -->
-                    <img src="welcome-bonus.png" alt="Browser puzzle piece and pin icons" width="4424" height="2116" loading="lazy">
-                </picture>
+                <img src="https://cdn.jsdelivr.net/gh/tabakerkaaaa/ai-voice-generator-welcome/welcome-bonus.webp"
+                     data-fallback="welcome-bonus.png"
+                     alt="Right-click context menu" width="4424" height="2116" loading="lazy">
             </div>
         </div>
     </div>
+
+    <script>
+      document.querySelectorAll('img').forEach(img => {
+        img.onerror = () => {
+          // Get the fallback source from the data attribute
+          const fallbackSrc = img.dataset.fallback;
+          if (fallbackSrc) {
+            // First, disable the error handler to prevent infinite loops
+            img.onerror = null;
+            // Then, set the new source
+            img.src = fallbackSrc;
+          }
+        };
+      });
+    </script>
 </body>
 </html>
